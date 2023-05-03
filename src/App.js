@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import {useState} from 'react';
-import {useSpring, animated} from 'react-spring';
 import {useDrag} from '@use-gesture/react';
 
 function App() {
@@ -13,10 +12,20 @@ function App() {
     })
   });
 
-  const logoPosSpring = useSpring({ x: 0, y: 0 })
-  const bindLogoPosSpring = useDrag((params)=>{
-      logoPosSpring.x.set(params.offset[0]);
-      logoPosSpring.y.set(params.offset[1]);
+  const [paragraphPos, setParagraphPos] = useState({ x: 0, y: 0 })
+  const bindParagraphPos = useDrag((params)=>{
+    setParagraphPos({
+      x: params.offset[0],
+      y: params.offset[1]
+    })
+  });
+
+  const [linkPos, setLinkPos] = useState({ x: 0, y: 0 })
+  const bindLinkPos = useDrag((params)=>{
+    setLinkPos({
+      x: params.offset[0],
+      y: params.offset[1]
+    })
   });
   
   return (
@@ -27,20 +36,24 @@ function App() {
           <img src={logo} className="App-logo" alt="logo" />
         </div>
           
-        <animated.div {...bindLogoPosSpring()} style={{x: logoPosSpring.x, y: logoPosSpring.y}}>
+        <div {...bindParagraphPos()} style={{position:'relative', top: paragraphPos.y, left: paragraphPos.x}}>
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
-        </animated.div>
+        </div>
 
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div {...bindLinkPos()} style={{position:'relative', top: linkPos.y, left: linkPos.x}}>
+          <a 
+            draggable='false'
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </div>
+
       </header>
     </div>
   );
