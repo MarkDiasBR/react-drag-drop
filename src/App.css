@@ -15,7 +15,6 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,8 +24,50 @@
   color: white;
 }
 
+.App-handle-container {
+  width: 100%;
+  height: 10px;
+  position: absolute;
+  top: 10px;
+}
+
+.App-handle {
+  width: 100px;
+  height: 10px;
+  background-color: white;
+  margin: 0 auto;
+  border-radius: 25px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.App-handle:hover {
+  opacity: 0.1;
+  transition: opacity 0.1s;
+}
+
+.App-overlay {
+  background-color: #282c34;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.App-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url(https://images.unsplash.com/photo-1499244571948-7ccddb3583f1);
+  background-size: cover;
+  background-position: center center;
+  z-index: -2;
+}
+
 .App-link {
   color: #61dafb;
+  user-select: none;
+  pointer-events: none;
 }
 
 @keyframes App-logo-spin {
